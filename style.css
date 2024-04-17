@@ -1,0 +1,8 @@
+@font-face {
+    font-family: MyCustomFont;
+    src: url('Alarabiya Normal Font.ttf') format('truetype');
+}
+
+.button-font {
+    font-family: MyCustomFont, Arial, sans-serif; /* استخدام الخط المحمل */
+}
